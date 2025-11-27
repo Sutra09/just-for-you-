@@ -149,20 +149,19 @@ audio{position:fixed;left:-9999px;top:-9999px;}
 <div class="rise-heart" style="left:70%;animation-delay:3s">❤</div>
 
 <main>
-  <section class="card">
-    <h1>Just for Her</h1>
-    <p class="lead">
-      Enter her name so every page whispers to her — a soft little corner of the internet
-      made only for <span class="name">your favourite human</span>.
-    </p>
-    <input type="text" id="fname" placeholder="Type her name here..." autocomplete="off">
-    <br>
-    <button class="button" onclick="start()">Make it hers ➜</button>
-    <p class="small">
-      Her name stays only on this device. Tap the chibi and watch her react ✨
-    </p>
+  <section class="card" id="intro-card">
+    <!-- your existing heading, text, input, button -->
+    ...
   </section>
+
+  <!-- This iframe will show page1.html, page2.html, etc -->
+  <iframe id="viewer" name="mainframe"
+          style="display:none;width:100%;max-width:860px;height:75vh;
+                 border-radius:20px;border:none;
+                 box-shadow:0 10px 30px rgba(0,0,0,0.08);">
+  </iframe>
 </main>
+
 
 <script>
 const charIndex = document.getElementById('charIndex');
