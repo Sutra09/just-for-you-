@@ -1,1 +1,182 @@
-<html><body><h1>Enter Name</h1><input id='name'><button onclick="localStorage.setItem('hername',document.getElementById('name').value);location='page1.html'">Start</button></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Just for Her</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --accent:#ff7bbf;
+  --accent-soft:#ffd3e9;
+  --deep:#c2186b;
+  --bg1:#fff6fb;
+  --bg2:#fff0f6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Quicksand',sans-serif;
+  background:linear-gradient(180deg,var(--bg1),var(--bg2));
+  color:#4b2b3a;
+  overflow:hidden;
+}
+main{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+}
+.card{
+  width:100%;
+  max-width:860px;
+  background:rgba(255,255,255,0.94);
+  border-radius:20px;
+  box-shadow:0 14px 34px rgba(0,0,0,0.08);
+  padding:24px 18px 28px;
+  text-align:center;
+  position:relative;
+}
+@media(min-width:640px){
+  .card{padding:30px 32px 34px;}
+}
+h1{
+  font-family:'Great Vibes',cursive;
+  color:var(--deep);
+  font-size:2.6rem;
+  margin-bottom:6px;
+}
+@media(min-width:640px){
+  h1{font-size:3rem;}
+}
+.lead{
+  font-size:1rem;
+  margin:8px auto 12px;
+  color:#6b495a;
+  max-width:520px;
+  line-height:1.6;
+}
+.button{
+  display:inline-block;
+  padding:10px 22px;
+  border-radius:999px;
+  font-weight:700;
+  text-decoration:none;
+  cursor:pointer;
+  margin-top:14px;
+  font-size:0.98rem;
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  box-shadow:0 6px 18px rgba(255,123,191,0.25);
+}
+.small{
+  margin-top:10px;
+  font-size:0.85rem;
+  color:#8a5a6c;
+}
+.name{
+  color:var(--deep);
+  font-weight:800;
+}
+.float-char{
+  position:fixed;
+  width:120px;
+  animation:bounce 3s ease-in-out infinite;
+  cursor:pointer;
+  transition:transform 0.2s;
+  z-index:3;
+  left:12px;
+  bottom:18px;
+}
+@media(min-width:640px){
+  .float-char{width:140px;}
+}
+@keyframes bounce{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-14px)}
+  100%{transform:translateY(0)}
+}
+.rise-heart{
+  position:fixed;
+  font-size:22px;
+  color:#c2186b;
+  opacity:0.9;
+  animation:rise 7s linear infinite;
+  z-index:1;
+}
+@keyframes rise{
+  0%{transform:translateY(0);opacity:0.95}
+  100%{transform:translateY(-120vh);opacity:0}
+}
+.sparkle{
+  position:fixed;
+  width:26px;
+  opacity:0.9;
+  filter:drop-shadow(0 6px 12px rgba(194,33,107,0.18));
+  pointer-events:none;
+  z-index:2;
+}
+input[type="text"]{
+  width:100%;
+  max-width:360px;
+  padding:11px 14px;
+  border-radius:14px;
+  border:2px solid #ffd6ea;
+  font-size:1rem;
+  outline:none;
+  margin-top:6px;
+}
+audio{position:fixed;left:-9999px;top:-9999px;}
+</style>
+</head>
+<body>
+<audio autoplay loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<img src="https://cdn.pixabay.com/photo/2023/06/29/17/51/anime-girl-8098110_1280.png"
+     id="charIndex" class="float-char" alt="chibi">
+
+<img src="https://cdn.pixabay.com/photo/2012/04/26/19/43/star-42928_1280.png"
+     class="sparkle" style="right:10%;top:10%;width:30px">
+<img src="https://cdn.pixabay.com/photo/2016/03/31/20/36/petal-1294697_1280.png"
+     class="sparkle" style="left:12%;top:18%;width:32px">
+
+<div class="rise-heart" style="left:10%">❤</div>
+<div class="rise-heart" style="left:30%;animation-delay:1s">❤</div>
+<div class="rise-heart" style="left:50%;animation-delay:2s">❤</div>
+<div class="rise-heart" style="left:70%;animation-delay:3s">❤</div>
+
+<main>
+  <section class="card">
+    <h1>Just for Her</h1>
+    <p class="lead">
+      Enter her name so every page whispers to her — a soft little corner of the internet
+      made only for <span class="name">your favourite human</span>.
+    </p>
+    <input type="text" id="fname" placeholder="Type her name here..." autocomplete="off">
+    <br>
+    <button class="button" onclick="start()">Make it hers ➜</button>
+    <p class="small">
+      Her name stays only on this device. Tap the chibi and watch her react ✨
+    </p>
+  </section>
+</main>
+
+<script>
+const charIndex = document.getElementById('charIndex');
+charIndex.addEventListener('click',()=>{
+  charIndex.style.transform='scale(1.06) rotate(-5deg)';
+  setTimeout(()=>charIndex.style.transform='',380);
+});
+
+function start(){
+  const name = document.getElementById('fname').value.trim();
+  if(!name){ alert('Please enter her name 💗'); return; }
+  localStorage.setItem('hername', name);
+  window.location.href='page1.html';
+}
+</script>
+</body>
+</html>
