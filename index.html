@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Just For You 💖</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+.outer-wrap{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+  background:radial-gradient(circle at top,#ffe4f3,#ffe0b2);
+}
+.music-bubble{
+  position:fixed;
+  right:16px;
+  bottom:16px;
+  width:52px;
+  height:52px;
+  border-radius:999px;
+  background:#ff9acb;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-size:22px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.18);
+  cursor:pointer;
+  z-index:20;
+}
+.music-bubble.paused{
+  background:#ffe0f2;
+  color:#ff6fa8;
+}
+#viewer{
+  width:100%;
+  max-width:880px;
+  height:76vh;
+  border:none;
+  border-radius:24px;
+  box-shadow:0 14px 30px rgba(0,0,0,0.2);
+  display:none;
+  background:transparent;
+}
+.intro-card{
+  width:100%;
+  max-width:860px;
+}
+input[type="text"]{
+  width:100%;
+  max-width:360px;
+  padding:11px 14px;
+  border-radius:14px;
+  border:2px solid #ffd1e6;
+  font-size:1rem;
+  outline:none;
+  margin-top:6px;
+}
+</style>
+</head>
+<body>
+<div class="outer-wrap">
+  <section class="card intro-card" id="intro">
+    <h1>Just For You 💖</h1>
+    <p class="lead">
+      Type your name below and I’ll turn this whole tiny kawaii universe
+      into something that talks only to <span style="color:#ff6fa8;font-weight:800;">you</span>.
+    </p>
+    <input id="fname" type="text" placeholder="Your name here...">
+    <br>
+    <button class="button" onclick="startStory()">Start the story ➜</button>
+    <p class="small">
+      Your name stays only on this device. Once you start, the music and pages flow
+      smoothly together. 🎧
+    </p>
+  </section>
+  <iframe id="viewer" name="mainframe"></iframe>
+</div>
+
+<div class="music-bubble" id="musicBubble">♪</div>
+<audio id="bgm" loop>
+  <source src="assets/audio/music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const bgm = document.getElementById('bgm');
+const bubble = document.getElementById('musicBubble');
+let started = false;
+
+function startStory(){
+  const name = document.getElementById('fname').value.trim();
+  if(!name){
+    alert('Please type your name first 💖');
+    return;
+  }
+  localStorage.setItem('hername', name);
+  document.getElementById('intro').style.display='none';
+  const frame = document.getElementById('viewer');
+  frame.style.display='block';
+  frame.classList.add('fade-enter');
+  frame.src = 'page1.html';
+  setTimeout(()=>frame.classList.add('fade-enter-active'),10);
+
+  if(!started){
+    bgm.volume = 0.6;
+    bgm.play().catch(()=>{});
+    started = true;
+  }
+}
+
+bubble.addEventListener('click', ()=>{
+  if(bgm.paused){
+    bgm.play().catch(()=>{});
+    bubble.classList.remove('paused');
+    bubble.textContent = '♪';
+  } else {
+    bgm.pause();
+    bubble.classList.add('paused');
+    bubble.textContent = '❚❚';
+  }
+});
+
+// Autoplay attempt on first user interaction
+window.addEventListener('click', ()=>{
+  if(!started){
+    bgm.volume = 0.6;
+    bgm.play().catch(()=>{});
+    started = true;
+  }
+}, { once:true });
+</script>
+</body>
+</html>

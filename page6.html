@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Thank You</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="assets/css/style.css">
+<base target="mainframe">
+</head>
+<body class="page6">
+<main>
+  <section class="card">
+    <img src="assets/images/chibi6.svg" class="chibi" id="chibi">
+    <h2>Thank You</h2>
+    <p class="lead">
+      <span id="nameholder" class="name">Friend</span>, thank you for being my best friend.<br>
+My chaos partner. My emotional support human. My personal comedian.  
+You’re not just important — you’re a whole blessing.
+    </p>
+    
+    
+<br>
+<a href="contract_funny.html" class="button">Funny Best-Friend Contract 🤝</a>
+<a href="contract_romantic.html" class="button-soft">Soft Best-Friend Contract 💛</a>
+<br>
+<a href="page1.html" class="button-soft" style="margin-top:12px;">Read again from the start ⟳</a>
+<p class="small" style="margin-top:14px;">
+✨ Psst... tap the chibi <strong>3 times</strong> to unlock a secret surprise page.
+</p>
+<script>
+let taps = 0;
+const c = document.getElementById('chibi');
+c.addEventListener('click', ()=>{
+  taps++;
+  if(taps === 3){
+    window.location.href = 'secret.html';
+  }
+});
+</script>
+
+  </section>
+</main>
+<script src="assets/js/main.js"></script>
+<script>
+loadName('nameholder');
+chibiInteractive('chibi');
+</script>
+</body>
+</html>
